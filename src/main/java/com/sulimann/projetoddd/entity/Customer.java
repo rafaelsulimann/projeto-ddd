@@ -38,7 +38,7 @@ public class Customer {
     this.active = false;
   }
 
-  public void changeAddress(Address address) {
+  public void setAddress(Address address) {
     if(address == null){
       throw new IllegalArgumentException("Address is required");
     }

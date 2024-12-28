@@ -1,5 +1,8 @@
 package com.sulimann.projetoddd.entity;
 
+import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
+import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
+
 public class Customer {
 
   private String id;
@@ -14,12 +17,8 @@ public class Customer {
   }
 
   private void validate(){
-    if (this.id == null || this.id.isEmpty()) {
-      throw new IllegalArgumentException("Id is required");
-    }
-    if (this.name == null || this.name.isEmpty()) {
-      throw new IllegalArgumentException("Name is required");
-    }
+    hasText(this.id, "Id is required");
+    hasText(this.name, "Name is required");
   }
 
   public void changeName(String name) {
@@ -28,9 +27,7 @@ public class Customer {
   }
 
   public void activate() {
-    if(this.address == null){
-      throw new IllegalArgumentException("Address is mandatory to activate the customer");
-    }
+    notNull(this.address, "Address is mandatory to activate the customer");
     this.active = true;
   }
 
@@ -39,9 +36,7 @@ public class Customer {
   }
 
   public void setAddress(Address address) {
-    if(address == null){
-      throw new IllegalArgumentException("Address is required");
-    }
+    notNull(address, "Address is required");
     this.address = address;
   }
 

@@ -1,5 +1,7 @@
 package com.sulimann.projetoddd.entity;
 
+import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
+
 public class Address {
 
   private String street;
@@ -18,20 +20,10 @@ public class Address {
   }
 
   private void validate(){
-    if (this.street == null || this.street.isEmpty()) {
-      throw new IllegalArgumentException("Street is required");
-    }
-    if (this.number == null || this.number.isEmpty()) {
-      throw new IllegalArgumentException("Number is required");
-    }
-    if (this.city == null || this.city.isEmpty()) {
-      throw new IllegalArgumentException("City is required");
-    }
-    if (this.state == null || this.state.isEmpty()) {
-      throw new IllegalArgumentException("State is required");
-    }
-    if (this.zipCode == null || this.zipCode.isEmpty()) {
-      throw new IllegalArgumentException("ZipCode is required");
-    }
+    hasText(this.street, "Street is required");
+    hasText(this.number, "Number is required");
+    hasText(this.city, "City is required");
+    hasText(this.state, "State is required");
+    hasText(this.zipCode, "ZipCode is required");
   }
 }

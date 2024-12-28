@@ -28,6 +28,7 @@ public class Customer {
 
   public void changeName(String name) {
     this.name = name;
+    this.validate();
   }
 
   public void activate() {

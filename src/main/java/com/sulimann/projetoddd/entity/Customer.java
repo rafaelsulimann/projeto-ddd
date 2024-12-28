@@ -5,6 +5,7 @@ public class Customer {
   private String id;
   private String name;
   private String address;
+  private boolean active;
 
   public Customer(String id, String name, String address) {
     this.id = id;
@@ -12,24 +13,16 @@ public class Customer {
     this.address = address;
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
+  public void changeName(String name) {
     this.name = name;
   }
 
-  public String getAddress() {
-    return address;
+  public void activate() {
+    this.active = true;
   }
 
-  public void setAddress(String address) {
-    this.address = address;
+  public void deactivate() {
+    this.active = false;
   }
 
 }

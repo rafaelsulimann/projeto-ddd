@@ -11,6 +11,19 @@ public class Customer {
     this.id = id;
     this.name = name;
     this.address = address;
+    this.validate();
+  }
+
+  private void validate(){
+    if (this.id == null || this.id.isEmpty()) {
+      throw new IllegalArgumentException("Id is required");
+    }
+    if (this.name == null || this.name.isEmpty()) {
+      throw new IllegalArgumentException("Name is required");
+    }
+    if (this.address == null || this.address.isEmpty()) {
+      throw new IllegalArgumentException("Address is required");
+    }
   }
 
   public void changeName(String name) {
@@ -18,6 +31,9 @@ public class Customer {
   }
 
   public void activate() {
+    if(this.address == null || this.address.isEmpty()){
+      throw new IllegalArgumentException("Address is mandatory to activate the customer");
+    }
     this.active = true;
   }
 

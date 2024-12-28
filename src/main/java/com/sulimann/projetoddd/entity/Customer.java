@@ -4,13 +4,12 @@ public class Customer {
 
   private String id;
   private String name;
-  private String address;
+  private Address address;
   private boolean active;
 
-  public Customer(String id, String name, String address) {
+  public Customer(String id, String name) {
     this.id = id;
     this.name = name;
-    this.address = address;
     this.validate();
   }
 
@@ -21,9 +20,6 @@ public class Customer {
     if (this.name == null || this.name.isEmpty()) {
       throw new IllegalArgumentException("Name is required");
     }
-    if (this.address == null || this.address.isEmpty()) {
-      throw new IllegalArgumentException("Address is required");
-    }
   }
 
   public void changeName(String name) {
@@ -32,7 +28,7 @@ public class Customer {
   }
 
   public void activate() {
-    if(this.address == null || this.address.isEmpty()){
+    if(this.address == null){
       throw new IllegalArgumentException("Address is mandatory to activate the customer");
     }
     this.active = true;
@@ -40,6 +36,13 @@ public class Customer {
 
   public void deactivate() {
     this.active = false;
+  }
+
+  public void changeAddress(Address address) {
+    if(address == null){
+      throw new IllegalArgumentException("Address is required");
+    }
+    this.address = address;
   }
 
 }

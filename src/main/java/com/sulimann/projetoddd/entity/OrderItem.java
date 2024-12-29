@@ -25,6 +25,7 @@ public class OrderItem {
     hasText(this.id, "Id is required");
     hasText(this.name, "Name is required");
     notNull(this.price, "Price is required");
+    isTrue(this.price.compareTo(BigDecimal.ZERO) > 0, "Price must be greater than 0");
     isTrue(this.quantity > 0, "Quantity must be greater than 0");
   }
 

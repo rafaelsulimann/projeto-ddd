@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class OrderItemTest {
 
@@ -37,10 +39,20 @@ public class OrderItemTest {
           .hasMessage("Price is required");
     }
 
-    @Test
+    @ParameterizedTest
+    @DisplayName("Should throw exception when price is equal or less than 0")
+    @ValueSource(strings = {"0", "-1"})
+    void shouldThrowExceptionWhenPriceIsLessThan1(String price) {
+      assertThatThrownBy(() -> new OrderItem("123", "item 1", new BigDecimal(price), 1))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("Price must be greater than 0");
+    }
+
+    @ParameterizedTest
     @DisplayName("Should throw exception when quantity is less than 1")
-    void shouldThrowExceptionWhenQuantityIsLessThan1() {
-      assertThatThrownBy(() -> new OrderItem("123", "item 1", new BigDecimal("100.00"), 0))
+    @ValueSource(ints = {0, -1})
+    void shouldThrowExceptionWhenQuantityIsLessThan1(int quantity) {
+      assertThatThrownBy(() -> new OrderItem("123", "item 1", new BigDecimal("100.00"), quantity))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Quantity must be greater than 0");
     }

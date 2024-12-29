@@ -17,8 +17,8 @@ public class OrderTest {
     @Test
     @DisplayName("Should throw exception when id is empty")
     void shouldThrowExceptionWhenIdIsEmpty() {
-      var item1 = new OrderItem("123", "item 1", new BigDecimal("100.00"), 1);
-      var item2 = new OrderItem("456", "item 2", new BigDecimal("100.00"), 2);
+      var item1 = new OrderItem("123","321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = new OrderItem("456","321", "item 2", new BigDecimal("100.00"), 2);
 
       assertThatThrownBy(() -> new Order("", "123", Set.of(item1, item2)))
           .isInstanceOf(IllegalArgumentException.class)
@@ -28,8 +28,8 @@ public class OrderTest {
     @Test
     @DisplayName("Should throw exception when customerId is empty")
     void shouldThrowExceptionWhenCustomerIdIsEmpty() {
-      var item1 = new OrderItem("123", "item 1", new BigDecimal("100.00"), 1);
-      var item2 = new OrderItem("456", "item 2", new BigDecimal("100.00"), 2);
+      var item1 = new OrderItem("123","321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = new OrderItem("456","321", "item 2", new BigDecimal("100.00"), 2);
 
       assertThatThrownBy(() -> new Order("123", "", Set.of(item1, item2)))
           .isInstanceOf(IllegalArgumentException.class)
@@ -47,8 +47,8 @@ public class OrderTest {
     @Test
     @DisplayName("Should calculate total")
     void shouldCalculateTotal() {
-      var item1 = new OrderItem("123", "item 1", new BigDecimal("100.00"), 1);
-      var item2 = new OrderItem("456", "item 2", new BigDecimal("100.00"), 2);
+      var item1 = new OrderItem("123","321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = new OrderItem("456","321", "item 2", new BigDecimal("100.00"), 2);
       var order = new Order("123", "123", Set.of(item1));
       var order2 = new Order("123", "123", Set.of(item1, item2));
 

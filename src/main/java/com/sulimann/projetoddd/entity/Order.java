@@ -29,7 +29,7 @@ public class Order {
 
   private BigDecimal calculateTotal() {
     return this.items.stream()
-        .map(item -> item.getPrice().multiply(new BigDecimal(item.getQuantity())))
+        .map(item -> item.getSubtotal())
         .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 

@@ -1,5 +1,8 @@
 package com.sulimann.projetoddd.entity;
 
+import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
+import static com.sulimann.projetoddd.shared.AssertUtils.isFalse;
+
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -14,13 +17,24 @@ public class Order {
     this.id = id;
     this.customerId = customerId;
     this.items = items;
-    this.total = this.getTotal();
+    this.total = this.calculateTotal();
+    this.validate();
   }
 
-  private BigDecimal getTotal() {
+  private void validate() {
+    hasText(this.id, "Id is required");
+    hasText(this.customerId, "CustomerId is required");
+    isFalse(this.items.isEmpty(), "Items are required");
+  }
+
+  private BigDecimal calculateTotal() {
     return this.items.stream()
-      .map(item -> item.getPrice().multiply(new BigDecimal(item.getQuantity())))
-      .reduce(BigDecimal.ZERO, BigDecimal::add);
+        .map(item -> item.getPrice().multiply(new BigDecimal(item.getQuantity())))
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
+  }
+
+  public BigDecimal getTotal() {
+    return total;
   }
 
 }

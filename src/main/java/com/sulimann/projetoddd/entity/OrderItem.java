@@ -1,5 +1,9 @@
 package com.sulimann.projetoddd.entity;
 
+import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
+import static com.sulimann.projetoddd.shared.AssertUtils.isTrue;
+import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
+
 import java.math.BigDecimal;
 
 public class OrderItem {
@@ -14,6 +18,14 @@ public class OrderItem {
     this.name = name;
     this.price = price;
     this.quantity = quantity;
+    this.validate();
+  }
+
+  private void validate() {
+    hasText(this.id, "Id is required");
+    hasText(this.name, "Name is required");
+    notNull(this.price, "Price is required");
+    isTrue(this.quantity > 0, "Quantity must be greater than 0");
   }
 
   public BigDecimal getPrice() {

@@ -14,4 +14,16 @@ public class AssertUtils {
     }
   }
 
+  public static void isTrue(boolean value, String message) {
+    if (!value) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
+  public static void isFalse(boolean value, String message) {
+    if (value) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
 }

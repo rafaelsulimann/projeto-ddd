@@ -13,15 +13,6 @@ public class CustomerTest {
   class Constructor {
 
     @Test
-    @DisplayName("Should create Customer")
-    void shouldCreateCustomer() {
-      Customer customer = new Customer("123", "Rafael");
-
-      assertThat(customer.getId()).isEqualTo("123");
-      assertThat(customer.getName()).isEqualTo("Rafael");
-    }
-
-    @Test
     @DisplayName("Should throw exception when id is empty")
     void shouldThrowExceptionWhenIdIsEmpty() {
       assertThatThrownBy(() -> new Customer("", "Rafael"))

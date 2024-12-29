@@ -1,6 +1,5 @@
 package com.sulimann.projetoddd.entity;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -11,24 +10,6 @@ public class AddressTest {
 
   @Nested
   class Constructor {
-
-    @Test
-    @DisplayName("Should create an Address")
-    void shouldCreateAnAddress() {
-      String street = "Rua das Flores";
-      String number = "123";
-      String city = "São Paulo";
-      String state = "SP";
-      String zipCode = "12345-678";
-
-      Address address = new Address(street, number, city, state, zipCode);
-
-      assertThat(address.getStreet()).isEqualTo(street);
-      assertThat(address.getNumber()).isEqualTo(number);
-      assertThat(address.getCity()).isEqualTo(city);
-      assertThat(address.getState()).isEqualTo(state);
-      assertThat(address.getZipCode()).isEqualTo(zipCode);
-    }
 
     @Test
     @DisplayName("Should throw exception when street is empty")

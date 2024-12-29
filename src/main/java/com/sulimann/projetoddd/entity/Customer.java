@@ -40,4 +40,20 @@ public class Customer {
     this.address = address;
   }
 
+  public String getId() {
+    return this.id;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public Address getAddress() {
+    return this.address;
+  }
+
+  public boolean isActive() {
+    return this.active;
+  }
+
 }

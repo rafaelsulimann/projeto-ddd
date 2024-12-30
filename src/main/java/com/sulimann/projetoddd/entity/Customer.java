@@ -24,6 +24,10 @@ public class Customer {
     hasText(this.name, "Name is required");
   }
 
+  public String getId() {
+    return id;
+  }
+
   public void changeName(String name) {
     this.name = name;
     this.validate();
@@ -53,6 +57,14 @@ public class Customer {
 
   public boolean isActive() {
     return this.active;
+  }
+
+  public BigDecimal getRewardPoints() {
+    return rewardPoints;
+  }
+
+  public void addRewardPoints(BigDecimal rewardPoints) {
+    this.rewardPoints = this.rewardPoints.add(rewardPoints);
   }
 
 }

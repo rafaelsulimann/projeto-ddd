@@ -3,6 +3,8 @@ package com.sulimann.projetoddd.entity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -111,6 +113,19 @@ public class CustomerTest {
       customer.deactivate();
 
       assertThat(customer.isActive()).isFalse();
+    }
+  }
+
+  @Nested
+  class AddRewardPoints {
+
+    @Test
+    @DisplayName("Should add reward points")
+    void shouldAddRewardPoints() {
+      var customer = new Customer("123", "Rafael");
+      customer.addRewardPoints(new BigDecimal("100.00"));
+
+      assertThat(customer.getRewardPoints()).isEqualTo(new BigDecimal("100.00"));
     }
   }
 

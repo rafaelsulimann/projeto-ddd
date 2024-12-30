@@ -3,12 +3,15 @@ package com.sulimann.projetoddd.entity;
 import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
 import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 
+import java.math.BigDecimal;
+
 public class Customer {
 
   private String id;
   private String name;
   private Address address;
-  private boolean active;
+  private boolean active = false;
+  private BigDecimal rewardPoints = BigDecimal.ZERO;
 
   public Customer(String id, String name) {
     this.id = id;

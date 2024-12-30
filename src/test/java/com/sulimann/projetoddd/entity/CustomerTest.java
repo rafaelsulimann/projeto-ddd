@@ -35,7 +35,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should change name")
     void shouldChangeName(){
-      Customer customer = new Customer("123", "Rafael");
+      var customer = new Customer("123", "Rafael");
       customer.changeName("Rafael Suliman");
 
       assertThat(customer.getName()).isEqualTo("Rafael Suliman");
@@ -44,7 +44,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when name is empty on Customer.changeName")
     void shouldThrowExceptionWhenNameIsEmptyOnChangeName() {
-      Customer customer = new Customer("123", "Rafael");
+      var customer = new Customer("123", "Rafael");
       assertThatThrownBy(() -> customer.changeName(""))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Name is required");
@@ -58,7 +58,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should activate customer")
     void shouldActivateCustomer() {
-      Customer customer = new Customer("123", "Rafael");
+      var customer = new Customer("123", "Rafael");
       customer.setAddress(new Address("Rua 1", "123", "12345-123", "São Paulo", "SP"));
       customer.activate();
 
@@ -68,7 +68,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when activate a customer without address")
     void shouldThrowExceptionWhenActivateCustomerWithoutAddress() {
-      Customer customer = new Customer("123", "Rafael");
+      var customer = new Customer("123", "Rafael");
 
       assertThatThrownBy(() -> customer.activate())
           .isInstanceOf(IllegalArgumentException.class)
@@ -83,8 +83,8 @@ public class CustomerTest {
     @Test
     @DisplayName("Should set address")
     void shouldSetAddress() {
-      Customer customer = new Customer("123", "Rafael");
-      Address address = new Address("Rua 1", "123", "12345-123", "São Paulo", "SP");
+      var customer = new Customer("123", "Rafael");
+      var address = new Address("Rua 1", "123", "12345-123", "São Paulo", "SP");
       customer.setAddress(address);
 
       assertThat(customer.getAddress()).isEqualTo(address);
@@ -93,7 +93,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when set address with null")
     void shouldThrowExceptionWhenSetAddressWithNull() {
-      Customer customer = new Customer("123", "Rafael");
+      var customer = new Customer("123", "Rafael");
 
       assertThatThrownBy(() -> customer.setAddress(null))
           .isInstanceOf(IllegalArgumentException.class)
@@ -107,7 +107,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should deactivate customer")
     void shouldDeactivateCustomer() {
-      Customer customer = new Customer("123", "Rafael");
+      var customer = new Customer("123", "Rafael");
       customer.deactivate();
 
       assertThat(customer.isActive()).isFalse();

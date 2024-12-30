@@ -56,6 +56,4 @@ public class OrderTest {
       assertThat(order2.getTotal()).isEqualTo(new BigDecimal("300.00"));
     }
   }
-
-
 }

@@ -1,5 +1,6 @@
 package com.sulimann.projetoddd.entity;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
@@ -39,6 +40,36 @@ public class ProductTest {
           .hasMessage("Price is required");
     }
 
+    @ParameterizedTest
+    @DisplayName("Should throw exception when price is less than zero")
+    @ValueSource(strings = { "-1", "0" })
+    void shouldThrowExceptionWhenPriceIsLessThanZero(String price) {
+      assertThatThrownBy(() -> new Product("1", "Product 1", new BigDecimal(price)))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Price must be greater than zero");
+    }
+  }
+
+  @Nested
+  class ChangePrice {
+
+    @Test
+    @DisplayName("Should update price")
+    void shouldUpdatePrice() {
+      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+
+      product.changePrice(new BigDecimal("200.00"));
+
+      assertThat(product.getPrice()).isEqualTo(new BigDecimal("200.00"));
+    }
+
+    @Test
+    @DisplayName("Should throw exception when price is null")
+    void shouldThrowExceptionWhenPriceIsNull() {
+      assertThatThrownBy(() -> new Product("1", "Product 1", null))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Price is required");
+    }
 
     @ParameterizedTest
     @DisplayName("Should throw exception when price is less than zero")
@@ -48,6 +79,7 @@ public class ProductTest {
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Price must be greater than zero");
     }
+
   }
 
 }

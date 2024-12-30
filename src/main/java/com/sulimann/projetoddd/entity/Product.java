@@ -25,4 +25,14 @@ public class Product {
     notNull(this.price, "Price is required");
     isTrue(this.price.compareTo(BigDecimal.ZERO) > 0, "Price must be greater than zero");
   }
+
+  public BigDecimal getPrice() {
+    return price.setScale(2);
+  }
+
+  public void changePrice(BigDecimal newPrice) {
+    this.price = newPrice;
+    this.validate();
+  }
+
 }

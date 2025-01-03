@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.service;
+package com.sulimann.projetoddd.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,9 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import com.sulimann.projetoddd.entity.Customer;
-import com.sulimann.projetoddd.entity.Order;
-import com.sulimann.projetoddd.entity.OrderItem;
+import com.sulimann.projetoddd.domain.entity.Customer;
+import com.sulimann.projetoddd.domain.entity.Order;
+import com.sulimann.projetoddd.domain.entity.OrderItem;
 
 public class OrderServiceTest {
 

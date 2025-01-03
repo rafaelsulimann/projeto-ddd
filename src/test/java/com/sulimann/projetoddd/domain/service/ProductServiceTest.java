@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.service;
+package com.sulimann.projetoddd.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import com.sulimann.projetoddd.entity.Product;
+import com.sulimann.projetoddd.domain.entity.Product;
 
 public class ProductServiceTest {
 

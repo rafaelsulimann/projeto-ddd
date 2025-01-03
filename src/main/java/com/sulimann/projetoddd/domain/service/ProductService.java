@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.service;
+package com.sulimann.projetoddd.domain.service;
 
 import static com.sulimann.projetoddd.shared.AssertUtils.isFalse;
 import static com.sulimann.projetoddd.shared.AssertUtils.isTrue;
@@ -7,7 +7,7 @@ import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 import java.math.BigDecimal;
 import java.util.Set;
 
-import com.sulimann.projetoddd.entity.Product;
+import com.sulimann.projetoddd.domain.entity.Product;
 
 public class ProductService {
 

@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.entity;
+package com.sulimann.projetoddd.domain.entity;
 
 import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
 import static com.sulimann.projetoddd.shared.AssertUtils.isTrue;

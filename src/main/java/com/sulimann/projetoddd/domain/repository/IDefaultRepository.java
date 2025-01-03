@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.repository;
+package com.sulimann.projetoddd.domain.repository;
 
 public interface IDefaultRepository <T> {
   void create(T entity);

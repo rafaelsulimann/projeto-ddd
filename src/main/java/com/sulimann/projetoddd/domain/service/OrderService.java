@@ -1,12 +1,12 @@
-package com.sulimann.projetoddd.service;
+package com.sulimann.projetoddd.domain.service;
 
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
-import com.sulimann.projetoddd.entity.Customer;
-import com.sulimann.projetoddd.entity.Order;
-import com.sulimann.projetoddd.entity.OrderItem;
+import com.sulimann.projetoddd.domain.entity.Customer;
+import com.sulimann.projetoddd.domain.entity.Order;
+import com.sulimann.projetoddd.domain.entity.OrderItem;
 
 public class OrderService {
 

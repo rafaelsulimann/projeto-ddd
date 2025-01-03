@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.entity;
+package com.sulimann.projetoddd.domain.entity;
 
 import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
 import static com.sulimann.projetoddd.shared.AssertUtils.isTrue;
@@ -33,6 +33,14 @@ public class Product {
   public void changePrice(BigDecimal newPrice) {
     this.price = newPrice;
     this.validate();
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
   }
 
 }

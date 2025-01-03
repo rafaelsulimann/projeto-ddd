@@ -1,4 +1,4 @@
-package com.sulimann.projetoddd.entity;
+package com.sulimann.projetoddd.domain.entity;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

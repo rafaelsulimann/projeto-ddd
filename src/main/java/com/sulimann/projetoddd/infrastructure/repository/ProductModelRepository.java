@@ -1,6 +1,5 @@
 package com.sulimann.projetoddd.infrastructure.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sulimann.projetoddd.domain.entity.Product;
@@ -10,7 +9,6 @@ import com.sulimann.projetoddd.infrastructure.model.ProductModel;
 @Repository
 public class ProductModelRepository implements IProductRepository{
 
-  @Autowired
   private final IProductModelRepository productModelRepository;
 
   public ProductModelRepository(IProductModelRepository productModelRepository) {

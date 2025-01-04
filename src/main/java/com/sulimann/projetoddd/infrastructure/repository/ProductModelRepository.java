@@ -24,19 +24,19 @@ public class ProductModelRepository implements IProductRepository{
   @Override
   public void create(Product entity) {
     notNull(entity, "Product is required");
-    this.productModelRepository.save(ProductModel.from(entity));
+    this.productModelRepository.save(ProductModel.fromEntity(entity));
   }
 
   @Override
   public void update(Product entity) {
     notNull(entity, "Product is required");
-    this.productModelRepository.save(ProductModel.from(entity));
+    this.productModelRepository.save(ProductModel.fromEntity(entity));
   }
 
   @Override
   public void delete(Product entity) {
     notNull(entity, "Product is required");
-    this.productModelRepository.delete(ProductModel.from(entity));
+    this.productModelRepository.delete(ProductModel.fromEntity(entity));
   }
 
   @Override

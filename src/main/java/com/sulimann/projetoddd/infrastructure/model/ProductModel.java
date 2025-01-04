@@ -26,7 +26,7 @@ public class ProductModel {
   private String name;
   private BigDecimal price;
 
-  public static ProductModel from(Product entity) {
+  public static ProductModel fromEntity(Product entity) {
     return new ProductModel(UUID.fromString(entity.getId()), entity.getName(), entity.getPrice());
   }
 

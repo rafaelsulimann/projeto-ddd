@@ -131,7 +131,7 @@ public class ProductModelRepositoryTest {
       assertThat(persistedProduct).isPresent();
       assertThat(persistedProduct.get()).usingRecursiveComparison().isEqualTo(product);
       assertThat(persistedProductModel).isNotNull();
-      assertThat(ProductModel.from(persistedProduct.get())).usingRecursiveComparison().isEqualTo(persistedProductModel);
+      assertThat(ProductModel.fromEntity(persistedProduct.get())).usingRecursiveComparison().isEqualTo(persistedProductModel);
     }
 
     @Test

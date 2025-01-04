@@ -1,6 +1,7 @@
 package com.sulimann.projetoddd.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -47,6 +48,27 @@ public class OrderServiceTest {
 
       assertThat(customer.getRewardPoints()).isEqualTo(new BigDecimal("250.00"));
       assertThat(order.getTotal()).isEqualTo(new BigDecimal("500.00"));
+    }
+
+    @Test
+    @DisplayName("Should throw exception when customer is null")
+    void shouldThrowExceptionWhenCustomerIsNull() {
+      var item1 = new OrderItem("1", "321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = new OrderItem("2", "321", "item 2", new BigDecimal("200.00"), 2);
+
+      assertThatThrownBy(() -> OrderService.placeOrder(null, Set.of(item1, item2))
+      ).isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Customer is required");
+    }
+
+    @Test
+    @DisplayName("Should throw exception when items are empty")
+    void shouldThrowExceptionWhenItemsAreEmpty() {
+      var customer = new Customer("123", "Rafael");
+
+      assertThatThrownBy(() -> OrderService.placeOrder(customer, Set.of())
+      ).isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Items are required");
     }
   }
 

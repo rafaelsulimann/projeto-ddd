@@ -1,5 +1,11 @@
 package com.sulimann.projetoddd.infrastructure.repository;
 
+import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
+import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
+
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.stereotype.Repository;
 
 import com.sulimann.projetoddd.domain.entity.Product;
@@ -17,25 +23,26 @@ public class ProductModelRepository implements IProductRepository{
 
   @Override
   public void create(Product entity) {
+    notNull(entity, "Product is required");
     this.productModelRepository.save(ProductModel.from(entity));
   }
 
   @Override
   public void update(Product entity) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
+    notNull(entity, "Product is required");
+    this.productModelRepository.save(ProductModel.from(entity));
   }
 
   @Override
   public void delete(Product entity) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    notNull(entity, "Product is required");
+    this.productModelRepository.delete(ProductModel.from(entity));
   }
 
   @Override
-  public Product findById(String id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findById'");
+  public Optional<Product> findById(String id) {
+    hasText(id, "Id is required");
+    return this.productModelRepository.findById(UUID.fromString(id)).map(ProductModel::toEntity);
   }
 
 }

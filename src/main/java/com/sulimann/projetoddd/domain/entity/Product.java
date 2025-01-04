@@ -38,4 +38,9 @@ public class Product {
     this.validate();
   }
 
+  public void changeName(String newName) {
+    this.name = newName;
+    this.validate();
+  }
+
 }

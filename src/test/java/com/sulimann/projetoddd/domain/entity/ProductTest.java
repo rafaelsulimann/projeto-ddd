@@ -82,4 +82,40 @@ public class ProductTest {
 
   }
 
+  @Nested
+  class ChangeName {
+
+    @Test
+    @DisplayName("Should update name")
+    void shouldUpdateName() {
+      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+
+      product.changeName("Product 2");
+
+      assertThat(product.getName()).isEqualTo("Product 2");
+    }
+
+    @Test
+    @DisplayName("Should throw exception when name is empty")
+    void shouldThrowExceptionWhenNameIsEmpty() {
+      assertThatThrownBy(() -> new Product("1", "", new BigDecimal("100.00"))
+      ).isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Name is required");
+    }
+  }
+
+  @Nested
+  class GetPrice {
+
+    @Test
+    @DisplayName("Should return the price")
+    void shouldReturnThePrice() {
+      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+
+      var price = product.getPrice();
+
+      assertThat(price).isEqualTo(new BigDecimal("100.00"));
+    }
+  }
+
 }

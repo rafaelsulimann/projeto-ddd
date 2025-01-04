@@ -30,4 +30,8 @@ public class ProductModel {
     return new ProductModel(UUID.fromString(entity.getId()), entity.getName(), entity.getPrice());
   }
 
+  public Product toEntity() {
+    return new Product(this.id.toString(), this.name, this.price);
+  }
+
 }

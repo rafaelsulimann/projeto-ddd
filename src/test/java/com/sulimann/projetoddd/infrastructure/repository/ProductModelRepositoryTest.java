@@ -1,12 +1,15 @@
 package com.sulimann.projetoddd.infrastructure.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -36,16 +39,108 @@ public class ProductModelRepositoryTest {
     iProductModelRepository.deleteAll();
   }
 
-  @Test
-  void shouldPersistAProduct() {
-    var product = new Product(UUID.randomUUID().toString(), "name", new BigDecimal("100.00"));
+  @Nested
+  class Create {
 
-    this.productModelRepository.create(product);
-    var persistedProduct = this.entityManager.find(ProductModel.class, UUID.fromString(product.getId()));
+    @Test
+    @DisplayName("Should throw exception when product is null")
+    void shouldThrowExceptionWhenProductIsNull() {
+      assertThatThrownBy(() -> productModelRepository.create(null))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Product is required");
+    }
 
-    assertThat(persistedProduct).isNotNull();
-    assertThat(persistedProduct.getId()).isEqualTo(UUID.fromString(product.getId()));
-    assertThat(persistedProduct.getName()).isEqualTo(product.getName());
-    assertThat(persistedProduct.getPrice()).isEqualTo(product.getPrice());
+    @Test
+    @DisplayName("Should persist a product")
+    void shouldPersistAProduct() {
+      var product = new Product(UUID.randomUUID().toString(), "name", new BigDecimal("100.00"));
+
+      productModelRepository.create(product);
+      var persistedProduct = entityManager.find(ProductModel.class, UUID.fromString(product.getId()));
+
+      assertThat(persistedProduct).isNotNull();
+      assertThat(persistedProduct.toEntity()).usingRecursiveComparison().isEqualTo(product);
+    }
   }
+
+  @Nested
+  class Update {
+
+    @Test
+    @DisplayName("Should update a product")
+    void shouldUpdateAProduct() {
+      var product = new Product(UUID.randomUUID().toString(), "name", new BigDecimal("100.00"));
+      productModelRepository.create(product);
+
+      product.changeName("new name");
+      product.changePrice(new BigDecimal("200.00"));
+      productModelRepository.update(product);
+
+      var persistedProduct = entityManager.find(ProductModel.class, UUID.fromString(product.getId()));
+
+      assertThat(persistedProduct).isNotNull();
+      assertThat(persistedProduct.toEntity()).usingRecursiveComparison().isEqualTo(product);
+    }
+
+    @Test
+    @DisplayName("Should throw exception when product is null")
+    void shouldThrowExceptionWhenProductIsNull() {
+      assertThatThrownBy(() -> productModelRepository.update(null))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Product is required");
+    }
+  }
+
+  @Nested
+  class Delete {
+
+    @Test
+    @DisplayName("Should delete a product")
+    void shouldDeleteAProduct() {
+      var product = new Product(UUID.randomUUID().toString(), "name", new BigDecimal("100.00"));
+      productModelRepository.create(product);
+
+      productModelRepository.delete(product);
+
+      var persistedProduct = entityManager.find(ProductModel.class, UUID.fromString(product.getId()));
+
+      assertThat(persistedProduct).isNull();
+    }
+
+    @Test
+    @DisplayName("Should throw exception when product is null")
+    void shouldThrowExceptionWhenProductIsNull() {
+      assertThatThrownBy(() -> productModelRepository.delete(null))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Product is required");
+    }
+  }
+
+  @Nested
+  class FindById {
+
+    @Test
+    @DisplayName("Should return a product by id")
+    void shouldReturnAProductById() {
+      var product = new Product(UUID.randomUUID().toString(), "name", new BigDecimal("100.00"));
+      productModelRepository.create(product);
+
+      var persistedProduct = productModelRepository.findById(product.getId());
+      var persistedProductModel = entityManager.find(ProductModel.class, UUID.fromString(product.getId()));
+
+      assertThat(persistedProduct).isPresent();
+      assertThat(persistedProduct.get()).usingRecursiveComparison().isEqualTo(product);
+      assertThat(persistedProductModel).isNotNull();
+      assertThat(ProductModel.from(persistedProduct.get())).usingRecursiveComparison().isEqualTo(persistedProductModel);
+    }
+
+    @Test
+    @DisplayName("Should throw exception when id is null")
+    void shouldThrowExceptionWhenIdIsNull() {
+      assertThatThrownBy(() -> productModelRepository.findById(null))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessage("Id is required");
+    }
+  }
+
 }

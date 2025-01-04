@@ -5,6 +5,9 @@ import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 
 import java.math.BigDecimal;
 
+import lombok.Getter;
+
+@Getter
 public class Customer {
 
   private String id;
@@ -24,10 +27,6 @@ public class Customer {
     hasText(this.name, "Name is required");
   }
 
-  public String getId() {
-    return id;
-  }
-
   public void changeName(String name) {
     this.name = name;
     this.validate();
@@ -45,22 +44,6 @@ public class Customer {
   public void setAddress(Address address) {
     notNull(address, "Address is required");
     this.address = address;
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public Address getAddress() {
-    return this.address;
-  }
-
-  public boolean isActive() {
-    return this.active;
-  }
-
-  public BigDecimal getRewardPoints() {
-    return rewardPoints;
   }
 
   public void addRewardPoints(BigDecimal rewardPoints) {

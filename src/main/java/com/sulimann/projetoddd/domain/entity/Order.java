@@ -6,6 +6,9 @@ import static com.sulimann.projetoddd.shared.AssertUtils.isFalse;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import lombok.Getter;
+
+@Getter
 public class Order {
 
   private String id;
@@ -31,10 +34,6 @@ public class Order {
     return this.items.stream()
         .map(item -> item.getSubtotal())
         .reduce(BigDecimal.ZERO, BigDecimal::add);
-  }
-
-  public BigDecimal getTotal() {
-    return total;
   }
 
 }

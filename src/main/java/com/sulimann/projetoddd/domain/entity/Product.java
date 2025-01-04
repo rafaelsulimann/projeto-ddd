@@ -6,6 +6,9 @@ import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 
 import java.math.BigDecimal;
 
+import lombok.Getter;
+
+@Getter
 public class Product {
 
   private String id;
@@ -33,14 +36,6 @@ public class Product {
   public void changePrice(BigDecimal newPrice) {
     this.price = newPrice;
     this.validate();
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
   }
 
 }

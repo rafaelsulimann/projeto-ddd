@@ -6,6 +6,9 @@ import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 
 import java.math.BigDecimal;
 
+import lombok.Getter;
+
+@Getter
 public class OrderItem {
 
   private String id;

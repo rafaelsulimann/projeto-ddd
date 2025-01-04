@@ -2,6 +2,9 @@ package com.sulimann.projetoddd.domain.entity;
 
 import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
 
+import lombok.Getter;
+
+@Getter
 public class Address {
 
   private String street;

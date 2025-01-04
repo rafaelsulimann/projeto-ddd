@@ -1,5 +1,6 @@
 package com.sulimann.projetoddd.domain.entity;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
@@ -62,6 +63,20 @@ public class OrderItemTest {
       assertThatThrownBy(() -> new OrderItem("123", "321", "item 1", new BigDecimal("100.00"), quantity))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Quantity must be greater than 0");
+    }
+  }
+
+  @Nested
+  class GetSubtotal {
+
+    @Test
+    @DisplayName("Should return the correct subtotal")
+    void shouldReturnTheCorrectSubtotal() {
+      var orderItem = new OrderItem("123", "321", "item 1", new BigDecimal("100.00"), 2);
+
+      var subtotal = orderItem.getSubtotal();
+
+      assertThat(subtotal).isEqualTo(new BigDecimal("200.00"));
     }
   }
 }

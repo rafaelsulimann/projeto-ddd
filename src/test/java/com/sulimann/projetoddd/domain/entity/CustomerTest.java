@@ -17,7 +17,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when id is empty")
     void shouldThrowExceptionWhenIdIsEmpty() {
-      assertThatThrownBy(() -> new Customer("", "Rafael"))
+      assertThatThrownBy(() -> Customer.create("", "Rafael"))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Id is required");
     }
@@ -25,7 +25,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when name is empty")
     void shouldThrowExceptionWhenNameIsEmpty() {
-      assertThatThrownBy(() -> new Customer("123", ""))
+      assertThatThrownBy(() -> Customer.create("123", ""))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Name is required");
     }
@@ -37,7 +37,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should change name")
     void shouldChangeName(){
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
       customer.changeName("Rafael Suliman");
 
       assertThat(customer.getName()).isEqualTo("Rafael Suliman");
@@ -46,7 +46,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when name is empty on Customer.changeName")
     void shouldThrowExceptionWhenNameIsEmptyOnChangeName() {
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
       assertThatThrownBy(() -> customer.changeName(""))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Name is required");
@@ -60,8 +60,8 @@ public class CustomerTest {
     @Test
     @DisplayName("Should activate customer")
     void shouldActivateCustomer() {
-      var customer = new Customer("123", "Rafael");
-      customer.setAddress(new Address("Rua 1", "123", "12345-123", "São Paulo", "SP"));
+      var customer = Customer.create("123", "Rafael");
+      customer.setAddress(Address.create("Rua 1", "123", "12345-123", "São Paulo", "SP"));
       customer.activate();
 
       assertThat(customer.isActive()).isTrue();
@@ -70,7 +70,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when activate a customer without address")
     void shouldThrowExceptionWhenActivateCustomerWithoutAddress() {
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
 
       assertThatThrownBy(() -> customer.activate())
           .isInstanceOf(IllegalArgumentException.class)
@@ -85,8 +85,8 @@ public class CustomerTest {
     @Test
     @DisplayName("Should set address")
     void shouldSetAddress() {
-      var customer = new Customer("123", "Rafael");
-      var address = new Address("Rua 1", "123", "12345-123", "São Paulo", "SP");
+      var customer = Customer.create("123", "Rafael");
+      var address = Address.create("Rua 1", "123", "12345-123", "São Paulo", "SP");
       customer.setAddress(address);
 
       assertThat(customer.getAddress()).isEqualTo(address);
@@ -95,7 +95,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should throw exception when set address with null")
     void shouldThrowExceptionWhenSetAddressWithNull() {
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
 
       assertThatThrownBy(() -> customer.setAddress(null))
           .isInstanceOf(IllegalArgumentException.class)
@@ -109,7 +109,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should deactivate customer")
     void shouldDeactivateCustomer() {
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
       customer.deactivate();
 
       assertThat(customer.isActive()).isFalse();
@@ -122,7 +122,7 @@ public class CustomerTest {
     @Test
     @DisplayName("Should add reward points")
     void shouldAddRewardPoints() {
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
       customer.addRewardPoints(new BigDecimal("100.00"));
 
       assertThat(customer.getRewardPoints()).isEqualTo(new BigDecimal("100.00"));

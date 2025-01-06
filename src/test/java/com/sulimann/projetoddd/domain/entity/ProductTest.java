@@ -19,7 +19,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should throw exception when id is empty")
     void shouldThrowExceptionWhenIdIsEmpty() {
-      assertThatThrownBy(() -> new Product("", "Product 1", new BigDecimal("100.00")))
+      assertThatThrownBy(() -> Product.create("", "Product 1", new BigDecimal("100.00")))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Id is required");
     }
@@ -27,7 +27,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should throw exception when name is empty")
     void shouldThrowExceptionWhenNameIsEmpty() {
-      assertThatThrownBy(() -> new Product("1", "", new BigDecimal("100.00")))
+      assertThatThrownBy(() -> Product.create("1", "", new BigDecimal("100.00")))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Name is required");
     }
@@ -35,7 +35,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should throw exception when price is null")
     void shouldThrowExceptionWhenPriceIsNull() {
-      assertThatThrownBy(() -> new Product("1", "Product 1", null))
+      assertThatThrownBy(() -> Product.create("1", "Product 1", null))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Price is required");
     }
@@ -44,7 +44,7 @@ public class ProductTest {
     @DisplayName("Should throw exception when price is less than zero")
     @ValueSource(strings = { "-1", "0" })
     void shouldThrowExceptionWhenPriceIsLessThanZero(String price) {
-      assertThatThrownBy(() -> new Product("1", "Product 1", new BigDecimal(price)))
+      assertThatThrownBy(() -> Product.create("1", "Product 1", new BigDecimal(price)))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Price must be greater than zero");
     }
@@ -56,7 +56,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should update price")
     void shouldUpdatePrice() {
-      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+      var product = Product.create("1", "Product 1", new BigDecimal("100.00"));
 
       product.changePrice(new BigDecimal("200.00"));
 
@@ -66,7 +66,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should throw exception when price is null")
     void shouldThrowExceptionWhenPriceIsNull() {
-      assertThatThrownBy(() -> new Product("1", "Product 1", null))
+      assertThatThrownBy(() -> Product.create("1", "Product 1", null))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Price is required");
     }
@@ -75,7 +75,7 @@ public class ProductTest {
     @DisplayName("Should throw exception when price is less than zero")
     @ValueSource(strings = { "-1", "0" })
     void shouldThrowExceptionWhenPriceIsLessThanZero(String price) {
-      assertThatThrownBy(() -> new Product("1", "Product 1", new BigDecimal(price)))
+      assertThatThrownBy(() -> Product.create("1", "Product 1", new BigDecimal(price)))
           .isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Price must be greater than zero");
     }
@@ -88,7 +88,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should update name")
     void shouldUpdateName() {
-      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+      var product = Product.create("1", "Product 1", new BigDecimal("100.00"));
 
       product.changeName("Product 2");
 
@@ -98,7 +98,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should throw exception when name is empty")
     void shouldThrowExceptionWhenNameIsEmpty() {
-      assertThatThrownBy(() -> new Product("1", "", new BigDecimal("100.00"))
+      assertThatThrownBy(() -> Product.create("1", "", new BigDecimal("100.00"))
       ).isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Name is required");
     }
@@ -110,7 +110,7 @@ public class ProductTest {
     @Test
     @DisplayName("Should return the price")
     void shouldReturnThePrice() {
-      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+      var product = Product.create("1", "Product 1", new BigDecimal("100.00"));
 
       var price = product.getPrice();
 

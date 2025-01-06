@@ -2,6 +2,8 @@ package com.sulimann.projetoddd.domain.entity;
 
 import static com.sulimann.projetoddd.shared.AssertUtils.hasText;
 
+import com.sulimann.projetoddd.domain.entity.contracts.AddressContract;
+
 import lombok.Getter;
 
 @Getter
@@ -13,13 +15,21 @@ public class Address {
   private String state;
   private String zipCode;
 
-  public Address(String street, String number, String city, String state, String zipCode) {
+  private Address(String street, String number, String city, String state, String zipCode) {
     this.street = street;
     this.number = number;
     this.city = city;
     this.state = state;
     this.zipCode = zipCode;
     this.validate();
+  }
+
+  public static Address create(String street, String number, String city, String state, String zipCode) {
+    return new Address(street, number, city, state, zipCode);
+  }
+
+  public static Address fromModel(AddressContract model) {
+    return new Address(model.getStreet(), model.getNumber(), model.getCity(), model.getState(), model.getZipCode());
   }
 
   private void validate(){
@@ -29,5 +39,6 @@ public class Address {
     hasText(this.state, "State is required");
     hasText(this.zipCode, "ZipCode is required");
   }
+
 
 }

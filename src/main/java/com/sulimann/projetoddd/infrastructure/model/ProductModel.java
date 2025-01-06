@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.sulimann.projetoddd.domain.entity.Product;
+import com.sulimann.projetoddd.domain.entity.contracts.ProductContract;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProductModel {
+public class ProductModel implements ProductContract{
 
   @Id
   private UUID id;
@@ -30,8 +31,17 @@ public class ProductModel {
     return new ProductModel(UUID.fromString(entity.getId()), entity.getName(), entity.getPrice());
   }
 
-  public Product toEntity() {
-    return new Product(this.id.toString(), this.name, this.price);
+  @Override
+  public String getId(){
+    return this.id.toString();
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setPrice(BigDecimal price) {
+    this.price = price;
   }
 
 }

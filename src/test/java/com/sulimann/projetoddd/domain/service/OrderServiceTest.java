@@ -22,11 +22,11 @@ public class OrderServiceTest {
     @Test
     @DisplayName("Should return the total of all orders")
     void shouldReturnTheTotalOfAllOrders() {
-      var item1 = new OrderItem("1", "321", "item 1", new BigDecimal("100.00"), 1);
-      var item2 = new OrderItem("2", "321", "item 2", new BigDecimal("200.00"), 2);
+      var item1 = OrderItem.create("1", "321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = OrderItem.create("2", "321", "item 2", new BigDecimal("200.00"), 2);
 
-      var order1 = new Order("1", "123", Set.of(item1));
-      var order2 = new Order("2", "123", Set.of(item2));
+      var order1 = Order.create("1", "123", Set.of(item1));
+      var order2 = Order.create("2", "123", Set.of(item2));
 
       var total = OrderService.getTotalOfAllOrders(Set.of(order1, order2));
 
@@ -40,9 +40,9 @@ public class OrderServiceTest {
     @Test
     @DisplayName("Should place an order")
     void shouldPlaceAnOrder() {
-      var customer = new Customer("123", "Rafael");
-      var item1 = new OrderItem("1", "321", "item 1", new BigDecimal("100.00"), 1);
-      var item2 = new OrderItem("2", "321", "item 2", new BigDecimal("200.00"), 2);
+      var customer = Customer.create("123", "Rafael");
+      var item1 = OrderItem.create("1", "321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = OrderItem.create("2", "321", "item 2", new BigDecimal("200.00"), 2);
 
       var order = OrderService.placeOrder(customer, Set.of(item1, item2));
 
@@ -53,8 +53,8 @@ public class OrderServiceTest {
     @Test
     @DisplayName("Should throw exception when customer is null")
     void shouldThrowExceptionWhenCustomerIsNull() {
-      var item1 = new OrderItem("1", "321", "item 1", new BigDecimal("100.00"), 1);
-      var item2 = new OrderItem("2", "321", "item 2", new BigDecimal("200.00"), 2);
+      var item1 = OrderItem.create("1", "321", "item 1", new BigDecimal("100.00"), 1);
+      var item2 = OrderItem.create("2", "321", "item 2", new BigDecimal("200.00"), 2);
 
       assertThatThrownBy(() -> OrderService.placeOrder(null, Set.of(item1, item2))
       ).isInstanceOf(IllegalArgumentException.class)
@@ -64,7 +64,7 @@ public class OrderServiceTest {
     @Test
     @DisplayName("Should throw exception when items are empty")
     void shouldThrowExceptionWhenItemsAreEmpty() {
-      var customer = new Customer("123", "Rafael");
+      var customer = Customer.create("123", "Rafael");
 
       assertThatThrownBy(() -> OrderService.placeOrder(customer, Set.of())
       ).isInstanceOf(IllegalArgumentException.class)

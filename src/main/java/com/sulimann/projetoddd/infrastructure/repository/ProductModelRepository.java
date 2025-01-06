@@ -15,9 +15,9 @@ import com.sulimann.projetoddd.infrastructure.model.ProductModel;
 @Repository
 public class ProductModelRepository implements IProductRepository{
 
-  private final IProductModelRepository productModelRepository;
+  private final ProductModelJPARepository productModelRepository;
 
-  public ProductModelRepository(IProductModelRepository productModelRepository) {
+  public ProductModelRepository(ProductModelJPARepository productModelRepository) {
     this.productModelRepository = productModelRepository;
   }
 
@@ -42,7 +42,7 @@ public class ProductModelRepository implements IProductRepository{
   @Override
   public Optional<Product> findById(String id) {
     hasText(id, "Id is required");
-    return this.productModelRepository.findById(UUID.fromString(id)).map(ProductModel::toEntity);
+    return this.productModelRepository.findById(UUID.fromString(id)).map(Product::fromModel);
   }
 
 }

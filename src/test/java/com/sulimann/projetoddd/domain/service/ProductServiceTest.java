@@ -22,8 +22,8 @@ public class ProductServiceTest {
     @Test
     @DisplayName("Should update price of all products")
     void shouldUpdatePriceOfAllProducts() {
-      var product1 = new Product("1", "Product 1", new BigDecimal("100.00"));
-      var product2 = new Product("2", "Product 2", new BigDecimal("200.00"));
+      var product1 = Product.create("1", "Product 1", new BigDecimal("100.00"));
+      var product2 = Product.create("2", "Product 2", new BigDecimal("200.00"));
 
       ProductService.increasePrice(Set.of(product1, product2), new BigDecimal("100.00"));
 
@@ -42,7 +42,7 @@ public class ProductServiceTest {
     @Test
     @DisplayName("Should throw exception when percentage is null")
     void shouldThrowExceptionWhenPercentageIsNull() {
-      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+      var product = Product.create("1", "Product 1", new BigDecimal("100.00"));
 
       assertThatThrownBy(() -> ProductService.increasePrice(Set.of(product), null))
           .isInstanceOf(IllegalArgumentException.class)
@@ -53,7 +53,7 @@ public class ProductServiceTest {
     @DisplayName("Should throw exception when percentage is less than zero")
     @ValueSource(strings = { "-1", "0" })
     void shouldThrowExceptionWhenPercentageIsLessThanZero(String percentage) {
-      var product = new Product("1", "Product 1", new BigDecimal("100.00"));
+      var product = Product.create("1", "Product 1", new BigDecimal("100.00"));
 
       assertThatThrownBy(() -> ProductService.increasePrice(Set.of(product), new BigDecimal(percentage)))
           .isInstanceOf(IllegalArgumentException.class)

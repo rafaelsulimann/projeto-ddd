@@ -5,6 +5,9 @@ import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 
 import java.math.BigDecimal;
 
+import com.sulimann.projetoddd.domain.entity.contracts.CustomerContract;
+
+import lombok.AccessLevel;
 import lombok.Getter;
 
 @Getter
@@ -13,13 +16,38 @@ public class Customer {
   private String id;
   private String name;
   private Address address;
-  private boolean active = false;
-  private BigDecimal rewardPoints = BigDecimal.ZERO;
+  private boolean active;
 
-  public Customer(String id, String name) {
+  @Getter(value = AccessLevel.NONE)
+  private BigDecimal rewardPoints;
+
+  private Customer(String id, String name, Address address, boolean active, BigDecimal rewardPoints) {
     this.id = id;
     this.name = name;
+    this.address = address;
+    this.active = active;
+    this.rewardPoints = rewardPoints;
     this.validate();
+  }
+
+  public static Customer create(String id, String name) {
+    return new Customer(
+      id,
+      name,
+      null,
+      true,
+      BigDecimal.ZERO
+    );
+  }
+
+  public static Customer fromModel(CustomerContract model) {
+    return new Customer(
+      model.getId(),
+      model.getName(),
+      Address.fromModel(model.getAddress()),
+      model.isActive(),
+      model.getRewardPoints()
+    );
   }
 
   private void validate(){
@@ -48,6 +76,10 @@ public class Customer {
 
   public void addRewardPoints(BigDecimal rewardPoints) {
     this.rewardPoints = this.rewardPoints.add(rewardPoints);
+  }
+
+  public BigDecimal getRewardPoints() {
+    return this.rewardPoints.setScale(2);
   }
 
 }

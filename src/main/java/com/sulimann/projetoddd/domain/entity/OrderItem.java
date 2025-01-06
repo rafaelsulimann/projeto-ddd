@@ -6,6 +6,8 @@ import static com.sulimann.projetoddd.shared.AssertUtils.notNull;
 
 import java.math.BigDecimal;
 
+import com.sulimann.projetoddd.domain.entity.contracts.OrderItemContract;
+
 import lombok.Getter;
 
 @Getter
@@ -17,13 +19,21 @@ public class OrderItem {
   private BigDecimal price;
   private int quantity;
 
-  public OrderItem(String id, String productId, String name, BigDecimal price, int quantity) {
+  private OrderItem(String id, String productId, String name, BigDecimal price, int quantity) {
     this.id = id;
     this.productId = productId;
     this.name = name;
     this.price = price;
     this.quantity = quantity;
     this.validate();
+  }
+
+  public static OrderItem create(String id, String productId, String name, BigDecimal price, int quantity) {
+    return new OrderItem(id, productId, name, price, quantity);
+  }
+
+  public static OrderItem fromModel(OrderItemContract model) {
+    return new OrderItem(model.getId(), model.getProductId(), model.getName(), model.getPrice(), model.getQuantity());
   }
 
   private void validate() {
